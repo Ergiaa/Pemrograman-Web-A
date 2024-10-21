@@ -1,0 +1,37 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "80:80"  # Make sure this port is available
+    volumes:
+      - ./app:/var/www/html/
+    depends_on:
+      - db
+    networks:
+      - app-network
+    command: >
+      sh -c "chown -R www-data:www-data /var/www/html/5026221096 &&
+      chmod -R 775 /var/www/html/5026221096/storage /var/www/html/5026221096/bootstrap/cache &&"
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: superSecretPassword
+      MYSQL_DATABASE: pWebDatabase
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
