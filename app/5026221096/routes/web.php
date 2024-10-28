@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DosenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/error', function () {
+    return "<h1>Server Error : Ada Kesalahan di Server</h1>";
+});
+
+Route::get('/blog', function () {
+    return view('blog');
+});
+
+Route::get('/dosen', [DosenController::class, 'index']);
+Route::get('/blog2', [DosenController::class, 'blog']);

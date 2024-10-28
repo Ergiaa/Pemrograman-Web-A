@@ -3,12 +3,16 @@ FROM php:8.2-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    tzdata \
     zip \
     unzip \
     git \
     libzip-dev \
     libpng-dev \
     && docker-php-ext-install pdo pdo_mysql zip gd
+
+# Define Timezone
+ENV TZ=Asia/Jakarta
 
 # Enable Apache Rewrite Module (required for Laravel routing)
 RUN a2enmod rewrite
