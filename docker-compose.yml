@@ -1,12 +1,12 @@
-version: '3'
+version: "3"
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: php-apache-container
     ports:
-      - "80:80"  # Make sure this port is available
+      - "80:80"
     volumes:
       - ./app:/var/www/html/
     depends_on:
@@ -14,17 +14,22 @@ services:
     networks:
       - app-network
     command: >
-      sh -c "chown -R www-data:www-data /var/www/html/5026221096 &&
-      chmod -R 775 /var/www/html/5026221096/storage /var/www/html/5026221096/bootstrap/cache &&"
+      sh -c "
+      chown -R www-data:www-data /var/www/html/5026221096 &&
+      chmod -R 775 /var/www/html/5026221096/storage /var/www/html/5026221096/bootstrap/cache &&
+      exec apache2-foreground
+      "
 
   db:
     image: mysql:8.0
-    container_name: db
+    container_name: mysql-container
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: superSecretPassword
-      MYSQL_DATABASE: pWebDatabase
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
       - db-data:/var/lib/mysql
     networks:

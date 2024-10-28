@@ -1,4 +1,4 @@
-# Use the PHP Apache image
+# Use the official PHP Apache image
 FROM php:8.2-apache
 
 # Install system dependencies
@@ -25,5 +25,5 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 # Update the default Apache configuration to use Laravel's public folder
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 
-# Expose port 80
+# Expose port 80 to connect to the web server
 EXPOSE 80
