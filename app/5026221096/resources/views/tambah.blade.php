@@ -1,43 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Tutorial Membuat CRUD Pada Laravel - www.malasngoding.com</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-	  href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-	  rel="stylesheet">
+@extends('template')  <!-- Extend the template -->
 
-	<!-- Material Icons -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+@section('headerPage', 'Tambah Data Pegawai')
 
-	<!-- Leaflet CSS -->
-	<link href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" rel="stylesheet">
+@section('content')  <!-- Start the content section -->
 
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="container">
+    <p class="text-center">
+        <a href="/pegawai" class="btn btn-warning btn-sm">Kembali</a>
+    </p>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <div class="card p-4">
+        <form action="/pegawai/store" method="POST">
+            {{ csrf_field() }}
 
-	<h2><a href="https://www.malasngoding.com">www.malasngoding.com</a></h2>
-	<h3>Data Pegawai</h3>
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" name="nama" id="nama" class="form-control" required="required" placeholder="Masukkan nama pegawai">
+            </div>
 
-	<a href="/pegawai"> Kembali</a>
+            <div class="form-group">
+                <label for="jabatan">Jabatan</label>
+                <input type="text" name="jabatan" id="jabatan" class="form-control" required="required" placeholder="Masukkan jabatan pegawai">
+            </div>
 
-	<br/>
-	<br/>
+            <div class="form-group">
+                <label for="umur">Umur</label>
+                <input type="number" name="umur" id="umur" class="form-control" required="required" placeholder="Masukkan umur pegawai">
+            </div>
 
-	<form action="/pegawai/store" method="post">
-		{{ csrf_field() }}
-		Nama <input type="text" name="nama" required="required"> <br/>
-		Jabatan <input type="text" name="jabatan" required="required"> <br/>
-		Umur <input type="number" name="umur" required="required"> <br/>
-		Alamat <textarea name="alamat" required="required"></textarea> <br/>
-		<input type="submit" value="Simpan Data">
-	</form>
+            <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <textarea name="alamat" id="alamat" class="form-control" required="required" placeholder="Masukkan alamat pegawai"></textarea>
+            </div>
 
-</body>
-</html>
+            <button type="submit" class="btn btn-primary mt-2">Simpan Data</button>
+        </form>
+    </div>
+</div>
+
+@endsection  <!-- End the content section -->

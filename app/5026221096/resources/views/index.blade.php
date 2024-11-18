@@ -1,62 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Tutorial Membuat CRUD Pada Laravel - www.malasngoding.com</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-	  href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-	  rel="stylesheet">
+@extends('template')
 
-	<!-- Material Icons -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+@section('headerPage', 'Data Pegawai')
 
-	<!-- Leaflet CSS -->
-	<link href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" rel="stylesheet">
+@section('content')
+	<div class="d-flex justify-content-between align-items-center mb-3">
+		<a href="/pegawai/tambah" class="btn btn-primary">
+			<i class="fas fa-plus"></i> Tambah Pegawai Baru
+		</a>
 
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Search Form -->
+		<form action="/pegawai" method="GET" class="d-flex align-items-center">
+			<input type="text" name="cari" class="form-control me-2" placeholder="Cari Nama Pegawai" value="{{ request('cari') }}">
+			<input type="number" name="pagination" class="form-control me-2" placeholder="Pagination" value="{{ request('pagination', 10) }}" style="max-width: 100px;">
+			<button type="submit" class="btn btn-success">
+				<i class="fas fa-search"></i> Cari
+			</button>
+		</form>
+	</div>
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-	<h2>www.malasngoding.com</h2>
-	<h3>Data Pegawai</h3>
-
-	<a href="/pegawai/tambah"> + Tambah Pegawai Baru</a>
-
-	<br/>
-	<br/>
-
-	<table border="1">
-		<tr>
-			<th>Nama</th>
-			<th>Jabatan</th>
-			<th>Umur</th>
-			<th>Alamat</th>
-			<th>Opsi</th>
-		</tr>
-		@foreach($pegawai as $p)
-		<tr>
-			<td>{{ $p->pegawai_nama }}</td>
-			<td>{{ $p->pegawai_jabatan }}</td>
-			<td>{{ $p->pegawai_umur }}</td>
-			<td>{{ $p->pegawai_alamat }}</td>
-			<td>
-				<a href="/pegawai/edit/{{ $p->pegawai_id }}">Edit</a>
-				|
-				<form action="/pegawai/hapus/{{ $p->pegawai_id }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" style="background: none; border: none; color: red; cursor: pointer;">Hapus</button>
-                </form>
-			</td>
-		</tr>
-		@endforeach
+	<table class="table table-bordered table-striped table-hover">
+		<thead class="table-dark">
+			<tr>
+				<th>Nama</th>
+				<th>Jabatan</th>
+				<th>Umur</th>
+				<th>Alamat</th>
+				<th>Aksi</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($pegawai as $p)
+			<tr>
+				<td>{{ $p->pegawai_nama }}</td>
+				<td>{{ $p->pegawai_jabatan }}</td>
+				<td>{{ $p->pegawai_umur }}</td>
+				<td>{{ $p->pegawai_alamat }}</td>
+				<td class="text-center">
+					<a href="/pegawai/edit/{{ $p->pegawai_id }}" class="btn btn-warning btn-icon">
+						<i class="fas fa-edit"></i>
+					</a>
+					<form action="/pegawai/hapus/{{ $p->pegawai_id }}" method="POST" style="display: inline;">
+						@csrf
+						@method('DELETE')
+						<button type="submit" class="btn btn-danger btn-icon">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+					</form>
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
 	</table>
 
+	<br/>
+	Halaman : {{ $pegawai->currentPage() }} <br/>
+	Jumlah Data : {{ $pegawai->total() }} <br/>
+	Data Per Halaman : {{ $pegawai->perPage() }} <br/>
 
-</body>
-</html>
+	<!-- Pagination Links -->
+	<div class="d-flex justify-content-center px-2">
+		{{ $pegawai->appends(['cari' => request('cari'), 'pagination' => request('pagination')])->links() }}
+	</div>
+@endsection

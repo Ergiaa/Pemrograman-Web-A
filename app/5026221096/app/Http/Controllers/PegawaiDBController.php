@@ -7,19 +7,59 @@ use Illuminate\Support\Facades\DB;
 
 class PegawaiDBController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // mengambil data dari table pegawai
-        $pegawai = DB::table('pegawai')->get();
+        // // mengambil data dari table pegawai
+        // // $pegawai = DB::table('pegawai')->get();
+        // $pagination = $request->query('pagination', 10);
 
-        // mengirim data pegawai ke view index
-        return view('index', ['pegawai' => $pegawai]);
+        // $pegawai = DB::table('pegawai')->paginate($pagination);
+
+        // // mengirim data pegawai ke view index
+        // return view('index', ['pegawai' => $pegawai]);
+
+
+        // menangkap data pencarian
+		$cari = $request->cari;
+
+        // mengatur jumlah pagination
+        $pagination = $request->query('pagination', 10);
+
+    	// mengambil data dari table pegawai sesuai pencarian data
+        if($cari == null) {
+            $pegawai = DB::table('pegawai')->paginate($pagination);
+        } else {
+            $pegawai = DB::table('pegawai')
+            ->where('pegawai_nama','like',"%".$cari."%")
+            ->paginate($pagination);
+        }
+
+
+    	// mengirim data pegawai ke view index
+		return view('index',['pegawai' => $pegawai]);
     }
 
     public function tambah()
     {
         return view('tambah');
     }
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+
+        // mengatur jumlah pagination
+        $pagination = $request->query('pagination', 10);
+
+    	// mengambil data dari table pegawai sesuai pencarian data
+		$pegawai = DB::table('pegawai')
+		->where('pegawai_nama','like',"%".$cari."%")
+		->paginate($pagination);
+
+    	// mengirim data pegawai ke view index
+		return view('index',['pegawai' => $pegawai]);
+	}
 
     // method untuk insert data ke table pegawai
     public function store(Request $request)
