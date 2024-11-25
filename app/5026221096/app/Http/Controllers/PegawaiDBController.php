@@ -71,7 +71,7 @@ class PegawaiDBController extends Controller
             'pegawai_umur' => $request->umur,
             'pegawai_alamat' => $request->alamat
         ]);
-        // alihkan halaman ke halaman pegawai
+        // redirect halaman ke halaman pegawai
         return redirect('/pegawai');
     }
 
@@ -89,14 +89,14 @@ class PegawaiDBController extends Controller
     public function editPost(Request $request, $id)
     {
         // update data pegawai berdasarkan id
-        DB::table('pegawai')->where('pegawai_id', $id)->update([
+        DB::table('pegawai')->where('pegawai_id', $request->id)->update([
             'pegawai_nama' => $request->nama,
             'pegawai_jabatan' => $request->jabatan,
             'pegawai_umur' => $request->umur,
             'pegawai_alamat' => $request->alamat
         ]);
 
-        // alihkan halaman kembali ke halaman pegawai
+        // redirect halaman kembali ke halaman pegawai
         return redirect('/pegawai');
     }
 
@@ -106,7 +106,7 @@ class PegawaiDBController extends Controller
         // hapus data pegawai berdasarkan id
         DB::table('pegawai')->where('pegawai_id', $id)->delete();
 
-        // alihkan halaman kembali ke halaman pegawai
+        // redirect halaman kembali ke halaman pegawai
         return redirect('/pegawai');
     }
 }

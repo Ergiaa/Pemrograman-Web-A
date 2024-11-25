@@ -5,7 +5,7 @@
 @section('content')
 	<div class="d-flex justify-content-between align-items-center mb-3">
 		<a href="/pegawai/tambah" class="btn btn-primary">
-			<i class="fas fa-plus"></i> Tambah Pegawai Baru
+			<i class="fa-solid fa-plus"></i> Tambah Pegawai Baru
 		</a>
 
 		<!-- Search Form -->
@@ -13,7 +13,7 @@
 			<input type="text" name="cari" class="form-control me-2" placeholder="Cari Nama Pegawai" value="{{ request('cari') }}">
 			<input type="number" name="pagination" class="form-control me-2" placeholder="Pagination" value="{{ request('pagination', 10) }}" style="max-width: 100px;">
 			<button type="submit" class="btn btn-success">
-				<i class="fas fa-search"></i> Cari
+				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
 		</form>
 	</div>
@@ -37,13 +37,13 @@
 				<td>{{ $p->pegawai_alamat }}</td>
 				<td class="text-center">
 					<a href="/pegawai/edit/{{ $p->pegawai_id }}" class="btn btn-warning btn-icon">
-						<i class="fas fa-edit"></i>
+						<i class="fa-solid fa-pen-to-square"></i>
 					</a>
 					<form action="/pegawai/hapus/{{ $p->pegawai_id }}" method="POST" style="display: inline;">
 						@csrf
 						@method('DELETE')
 						<button type="submit" class="btn btn-danger btn-icon">
-							<i class="fas fa-trash-alt"></i>
+							<i class="fa-solid fa-trash"></i>
 						</button>
 					</form>
 				</td>
