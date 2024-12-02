@@ -34,9 +34,31 @@
 	</style>
 </head>
 <body class="bg-light">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Viera Tito Virgiawan</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/pegawai">Pegawai</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/laptop">Laptop</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/eas">EAS</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-	<div class="container py-4">
-	    <h3 class="mb-4 text-center">Viera Tito Virgiawan - 5026221096</h3>
+    <div class="container py-4">
+        <h3 class="mb-4 text-center">Viera Tito Virgiawan - 5026221096</h3>
         <h2 class="mb-4 text-center">@yield('headerPage')</h2>
 
         @yield('link1')
@@ -50,4 +72,5 @@
 	<!-- Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</div>
 </html>

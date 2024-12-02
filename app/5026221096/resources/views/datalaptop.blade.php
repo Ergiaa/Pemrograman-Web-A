@@ -34,7 +34,13 @@
 				<td>{{ $l->kodelaptop }}</td>
 				<td>{{ $l->merklaptop }}</td>
 				<td>{{ $l->stocklaptop }}</td>
-				<td>{{ $l->tersedia }}</td>
+				<td>
+                    @if ( $l->tersedia === 'Y' )
+                        <i class="fa-solid fa-check text-success"></i>
+                    @else
+                        <i class="fa-solid fa-minus text-danger"></i>
+                    @endif
+                </td>
 				<td class="text-center">
 					<a href="/laptop/edit/{{ $l->kodelaptop }}" class="btn btn-warning btn-icon">
 						<i class="fa-solid fa-pen-to-square"></i>

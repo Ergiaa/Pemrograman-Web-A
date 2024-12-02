@@ -6,6 +6,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PegawaiDBController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LaptopController;
+use App\Http\Controllers\PengunjungController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,5 @@ Route::post('/laptop/store', [LaptopController::class, 'store']);
 Route::get('/laptop/edit/{kodelaptop}', [LaptopController::class, 'editGet']);
 Route::post('/laptop/edit/{kodelaptop}', [LaptopController::class, 'editPost']);
 Route::delete('/laptop/hapus/{kodelaptop}', [LaptopController::class, 'delete']);
+
+Route::get('/counter', [PengunjungController::class, 'index']);
