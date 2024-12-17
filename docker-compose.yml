@@ -14,7 +14,7 @@ services:
     networks:
       - app-network
     command: >
-      sh -c "
+      sh -c "composer create-project laravel/laravel:^9.0 /var/www/html/5026221096 &&
       chown -R www-data:www-data /var/www/html/5026221096 &&
       chmod -R 775 /var/www/html/5026221096/storage /var/www/html/5026221096/bootstrap/cache &&
       exec apache2-foreground

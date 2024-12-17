@@ -50,7 +50,7 @@
 						<a class="nav-link" href="/laptop">Laptop</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/eas">EAS</a>
+						<a class="nav-link" href="/nilai-kuliah">EAS</a>
 					</li>
 				</ul>
 			</div>

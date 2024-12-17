@@ -7,6 +7,7 @@ use App\Http\Controllers\PegawaiDBController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PengunjungController;
+use App\Http\Controllers\NilaiKuliahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,7 @@ Route::post('/laptop/edit/{kodelaptop}', [LaptopController::class, 'editPost']);
 Route::delete('/laptop/hapus/{kodelaptop}', [LaptopController::class, 'delete']);
 
 Route::get('/counter', [PengunjungController::class, 'index']);
+
+Route::get('/nilai-kuliah', [NilaiKuliahController::class, 'index']);
+Route::get('/nilai-kuliah/tambah', [NilaiKuliahController::class, 'tambah']);
+Route::post('/nilai-kuliah/tambah', [NilaiKuliahController::class, 'tambahPost']);
